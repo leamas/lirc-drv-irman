@@ -1,0 +1,52 @@
+IrMan input driver using libirman.
+==================================
+
+This driver supports reading from IrMan devices. This device [2] is
+discontinued and not available any more. However, the protocol
+used by it is emulated by other hardware, notably the IrToy.
+
+The driver expects a tty device as --device argument.
+
+Note that libirman contains test tools. Refer to the libirman
+documentation [¡] \(if you have installed a libirman package
+it's likely to contain these documents).
+
+
+Dependencies
+------------
+
+Building this driver requires lirc v 0.9.3+. You need the header files,
+the unversioned dynamic libraries and the pkg-config support (.pc
+filed). Typically, this lives in a package called lirc-devel.
+
+The build also requires the libirman library [1]. This is packaged
+in some distributions. It's a requirement that the package contains a
+dynamic .so module. Not all packages do, though. The package is easy
+to build and install locally if need be.
+
+
+Build, install and check
+------------------------
+
+With dependencies in place the build is trivial:
+
+    $ make
+    $ sudo make install
+
+The makefile respects CFLAGS and LDFLAGS if they are set in the environment
+during the build.
+
+After the installation, check the results using lirc-lsplugins:
+
+    $ lirc-lsplugins irman
+    irman               ---   /usr/lib64/lirc/plugins/irman_drv.so
+
+
+Adding the *--long* option gives more info on the driver.
+
+
+
+
+[1] https://sourceforge.net/projects/lirc/files/libirman/
+
+[2] http://www.intolect.com/irmandetail.htm
